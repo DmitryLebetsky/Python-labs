@@ -1,0 +1,6 @@
+ADD = "add"
+SUBTRACT = "sub"
+MULTIPLY = "mult"
+DIVIDE = "div"
+
+OPERATORS_LIST = [ADD, SUBTRACT, MULTIPLY, DIVIDE]
