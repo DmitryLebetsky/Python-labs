@@ -3,8 +3,6 @@ SUBTRACT = "sub"
 MULTIPLY = "mult"
 DIVIDE = "div"
 
-STOP_VALUE = ""
-
 OPERATORS_LIST = [ADD, SUBTRACT, MULTIPLY, DIVIDE]
 
 OPERATORS_DICT = {
@@ -13,3 +11,5 @@ OPERATORS_DICT = {
     MULTIPLY: "*",
     DIVIDE: "/",
 }
+
+STOP_VALUE = ""
