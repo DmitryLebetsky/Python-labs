@@ -2,13 +2,17 @@ from parse_text import parse_text_to_sentences
 from check_non_declarative import get_non_declarative_count
 from get_words import get_words
 from count_n_grams import count_n_grams
+from replace_abbreviations import replace_abbreviations
 
 
 text_to_parse = '''
-Hi! My 12345 name is Dmitry. He told: "If something happens? I am always with you.
-You can trust f38328h 48844j48384 43943j me. I promise." I am 10 years old.
-I want to be happy. Can I?! Wow, thanks!!! Are you sure????? Love you babe. Alex "If something happens, I Dr. am always
-with you. You can trust me. I promise.", he told.'''
+Hey! Livesey said, "The log cabin is not visible from the ship? They must be aiming at a flag. We must load a flag advance..."
+Where's the map, Billy? Billy Bones. The owner of the Treasure Island map, which started it all. The "word" hey.
+He drinks a lot and always has a cold. Bad character. Not married...
+"The chest contains gold, diamonds, etc.", Billy said.
+'''
+
+text_to_parse = replace_abbreviations(text_to_parse)
 
 sentences_list = parse_text_to_sentences(text_to_parse)
 non_declarative_count = get_non_declarative_count(sentences_list)
@@ -26,7 +30,7 @@ print("Average length of word in characters: " + str(average_length_of_word))
 print()
 
 print("top-K repeated N-grams in the text:")
-K = input ("Enter K: ")
-N = input ("Enter N: ")
+K = input("Enter K: ")
+N = input("Enter N: ")
 count_n_grams(text_to_parse, K, N)
 
