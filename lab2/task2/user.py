@@ -13,6 +13,20 @@ class User:
 
             if self.name in users_list:
                 #  create container according to user's data in database
-                return []
+                return set()
             else:
-                return []
+                return set()
+
+    def add(self, keys_list):
+        self.container.update(keys_list)
+
+    def remove(self, key):
+        self.container.discard(key)
+
+    def find(self, keys_list):
+        found_keys = [key for key in keys_list if key in self.container]
+        return found_keys
+
+    def list(self):
+        return self.container
+
