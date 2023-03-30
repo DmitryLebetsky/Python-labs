@@ -1,6 +1,9 @@
 DIVIDER_IN_FILES = '$'
 
-EXISTING_USERS_PATH = "./database/existing_users.txt"
+DATABASE_FOLDER_PATH = "./database/"
+EXISTING_USERS_FILENAME = "existing_users.txt"
+EXISTING_USERS_PATH = DATABASE_FOLDER_PATH + EXISTING_USERS_FILENAME
+TXT_FILETYPE = ".txt"
 
 OPEN_FILE_MODES = {
     "read": 'r',

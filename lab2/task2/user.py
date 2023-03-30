@@ -1,4 +1,5 @@
-from contants import EXISTING_USERS_PATH, OPEN_FILE_MODES, DIVIDER_IN_FILES
+import re
+from contants import EXISTING_USERS_PATH, OPEN_FILE_MODES, DIVIDER_IN_FILES, DATABASE_FOLDER_PATH, TXT_FILETYPE
 
 
 class User:
@@ -30,3 +31,19 @@ class User:
     def list(self):
         return self.container
 
+    def grep(self, regexp):
+        matched_keys = [key for key in self.container if bool(re.search(regexp, key))]
+        return matched_keys
+
+    def save(self):
+        data = DIVIDER_IN_FILES.join(self.container)
+        file_path = DATABASE_FOLDER_PATH + self.name + TXT_FILETYPE
+        with open(file_path, OPEN_FILE_MODES.get("write")) as file:
+            file.write(data)
+
+    def load(self, username):
+        file_path = DATABASE_FOLDER_PATH + username + TXT_FILETYPE
+        with open(file_path, OPEN_FILE_MODES.get("read")) as file:
+            data = file.read()
+            keys_list = data.split(DIVIDER_IN_FILES)
+            self.container.update(keys_list)
