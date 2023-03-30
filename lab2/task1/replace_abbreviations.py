@@ -1,10 +1,10 @@
 import re
-from constants import abbreviations_regexp_list, dot_regexp
+from constants import ABBREVIATIONS_REGEXP_LIST, DOT_REGEXP
 
 
 def replace_abbreviations(text):
-    for abbr_regexp in abbreviations_regexp_list:
-        replacement = abbr_regexp.replace(dot_regexp, '')
+    for abbr_regexp in ABBREVIATIONS_REGEXP_LIST:
+        replacement = abbr_regexp.replace(DOT_REGEXP, '')
         text = re.sub(abbr_regexp, replacement, text)
 
     return text
