@@ -1,5 +1,4 @@
-from user import User
+from user_flow import UserFlow
 
 
-dmitry = User("dmitry")
-dmitry.load()
+UserFlow()
