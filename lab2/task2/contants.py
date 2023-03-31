@@ -7,7 +7,7 @@ TXT_FILETYPE = ".txt"
 
 MULTIPLE_KEYS_COMMANDS = ["add", "find"]
 ONE_KEY_COMMANDS = ["remove", "grep", "load", "switch"]
-NO_KEY_COMMANDS = ["list", "save"]
+NO_KEY_COMMANDS = ["show", "save"]
 
 OPEN_FILE_MODES = {
     "read": 'r',

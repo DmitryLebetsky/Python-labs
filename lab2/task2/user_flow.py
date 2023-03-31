@@ -22,7 +22,7 @@ class UserFlow:
         print("-add <key1> <key2> ...")
         print("-remove <key>")
         print("-find <key1> <key2> ...")
-        print("-list")
+        print("-show")
         print("-grep <regexp>")
         print("-save")
         print("-load <username>")
@@ -75,7 +75,7 @@ class UserFlow:
                 if len(input_list) != 1:
                     print("This command doesn't have arguments!")
                     continue
-                if command == "list":
+                if command == "show":
                     print(self.current_user.list())
                 elif command == "save":
                     self.current_user.save()
