@@ -6,7 +6,7 @@ from replace_abbreviations import replace_abbreviations
 
 
 text_to_parse = '''
-Hey! Livesey said, "The log cabin is not visible from the ship? They must be aiming at a flag. We must load a flag advance..."
+Hey! Anne said, "The log cabin is not visible from the ship? They must be aiming at a flag. We must load a flag advance..."
 Where's the map, Billy? Billy Bones. The owner of the Treasure Island map, which started it all. The "word" hey.
 He drinks a lot and always has a cold. Bad character. Not married...
 "The chest contains gold, diamonds, etc.", Billy said.
