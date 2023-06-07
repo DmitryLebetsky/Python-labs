@@ -1,0 +1,45 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block title %}
+{{ realty.name }}
+{% endblock %}
+{% block content %}
+<div class="product-detail">
+    <style>
+        .bottom-right {
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          padding: 10px;
+          background-color: #f1f1f1;
+          border: 1px solid #ccc;
+        }
+    </style>
+
+    <img src="{% if realty.image %}{{ realty.image.url }}{% else %}
+    {% static 'img/no_image.png' %}{% endif %}">
+    <h1>{{ realty.name }}</h1>
+    <h2>
+        <a href="{{ realty.type.get_absolute_url }}">{{realty.RealtyType }}</a>
+    </h2>
+    <p class="price">Цена: {{ realty.cost }}</p>
+    <p>№: {{ realty.id }}</p>
+    <p>Тип: {{ realty.type.name }}</p>
+    <p>Владелец: {{ realty.owner.name }}</p>
+    {{ realty.description|linebreaks }}
+    {% if user.is_authenticated %}
+    <form action="{% url 'cart:cart_add' realty.id %}" method="post">
+        {{ cart_realty_form }}
+        {% csrf_token %}
+        <input type="submit" value="В корзину">
+    </form>
+    {% endif %}
+    {% if user.is_staff %}
+    <td><a href="edit/{{ realty.id }}/">Изменить</a> | <a href="delete/{{ realty.id }}/">Удалить</a></td>
+    {% endif %}
+    <br>
+    <div class="bottom-right">
+        <p>Joke for you: {{ joke }}</p>
+    </div>
+</div>
+{% endblock %}

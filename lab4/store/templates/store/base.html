@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}Shop{% endblock %}</title>
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div id="header" class="header">
+            <a href="/" class="logo">Недвижимость</a>
+            {% if user.is_superuser %}
+            <a href="/statistic/" class="navigation-link">Статистика</a>
+            {% endif %}
+        </div>
+        <div id="subheader">
+            Дата: <span id='date'></span>
+            | Время: <span id='time'></span>
+            | Часовой пояс: <span id='zone'></span>
+        </div>
+    <script>
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1; // Months start at 0!
+        let dd = today.getDate();
+        let h = today.getHours();
+        if (h < 10)
+            h = '0' + h;
+        let min = today.getMinutes();
+        if (min < 10)
+            min = '0' + min;
+        let sec = today.getSeconds();
+        if (sec < 10)
+            sec = '0' + sec;
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        let formattedToday = dd + '/' + mm + '/' + yyyy;
+        let time = h + ":" + min + ":" + sec;
+        let tz = -(new Date().getTimezoneOffset() / 60);
+        if (tz > 0) {
+            tz = "+" + tz;
+        }
+        tz = "UTC" + tz;
+        document.getElementById('date').innerHTML = formattedToday;
+        document.getElementById('time').innerHTML = time;
+        document.getElementById('zone').innerHTML = tz;
+    </script>
+    <div class="cart">
+            {% if user.is_authenticated %}
+            {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+            <div class="cart-info">
+                Корзина:
+                <a href="{% url 'cart:cart_detail' %}">
+                    дней - {{ total_items }}, общая стоимость - {{ cart.get_total_price }}
+                </a>
+            </div>
+            {% else %}
+            <div class="cart-info">Корзина пуста</div>
+            {% endif %}
+            {% endwith %}
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <div class="cart-info">
+                {{ user.username }}
+                <a href="{% url 'login:logout' %}">Выйти</a>
+            </div>
+            {% else %}
+            <div class="cart-info">
+                <a href="{% url 'login:login' %}">Войти</a>
+                <a href="{% url 'login:register' %}">Регистрация</a>
+            </div>
+            {% endif %}
+        </div>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

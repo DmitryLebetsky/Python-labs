@@ -1,0 +1,62 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block title %}
+  Список недвижимости на аренду
+{% endblock %}
+
+{% block content %}
+  <h1>Список недвижимости на аренду</h1>
+  <table class="cart">
+    <thead>
+      <tr>
+        <th>Изображение</th>
+        <th>Недвижимость</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+        <th>Кол-во часов</th>
+        <th>Цена за час</th>
+        <th>Цена</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+        {% with realty=item.realty %}
+          <tr>
+            <td>
+              <a href="{{ realty.get_absolute_url }}">
+                <img src="{% if realty.image %}{{ realty.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+              </a>
+            </td>
+            <td>{{ realty.name }}</td>
+            <td>
+              <form action="{% url 'cart:cart_add' realty.id %}" method="post">
+                {{ item.update_quantity_form.quantity }}
+                {{ item.update_quantity_form.update }}
+                <input type="submit" value="Обновить">
+                {% csrf_token %}
+              </form>
+            </td>
+            <td><a href="{% url 'cart:cart_remove' realty.id %}">Удалить</a></td>
+            <td>
+              {{ item.quantity }}
+            </td>
+            <td class="num">{{ item.cost }}</td>
+            <td class="num">{{ item.total_cost }}</td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+      <tr class="total">
+        <td>Всего</td>
+        <td colspan="4"></td>
+        <td class="num">{{ cart.get_total_price }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="text-right">
+    <a href="{% url 'store:realty_list' %}" class="button light">К полному списку</a>
+    <a href="{% url "orders:order_create" %}" class="button">
+      Купить
+  </a>
+  </p>
+{% endblock %}
